@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>Pool Shark</title>
@@ -9,7 +8,7 @@
         <script src="/static/jspsych-6.3.1/plugins/jspsych-video-slider-response.js"></script>
         <script src="/static/jspsych-6.3.1/plugins/jspsych-preload.js"></script>
         <script src="/static/stimuli_order.js" id="stim_order" type="text/javascript"></script>
-        <script src="/static/jspsych-6.3.1/jquery-min.js" ></script>
+        <script src="/static/jspsych-6.3.1/jquery-min.js"></script>
         <link href="/static/jspsych-6.3.1/fonts/">
         <link href="/static/jspsych-6.3.1/css/jspsych.css" rel="stylesheet" type="text/css">
     </head>
@@ -26,12 +25,24 @@
 
         var welcome = {
             type: 'html-keyboard-response',
-            stimulus: "Welcome to the experiment. Press any key to begin."
+            stimulus: "<p style='font-size: x-large;'>Welcome to the experiment. Press any key to begin.</p>"
         }
 
         var thanks = {
             type: 'html-keyboard-response',
-            stimulus: "You have finished this experiment! Thank you for participating.<br>Press any key. "
+            stimulus: "You have finished this experiment! Thank you for participating.<br>Press any key. ",
+            on_finish: function (){
+                var trial_dat = jsPsych.data.getLastTrialData().json()
+                if (JSON.parse(trial_dat)['trial_type'] === 'video_slider_response'){
+                     $.ajax({
+                         type: "POST",
+                         contentType: "application/json;charset=utf-8",
+                         url:"http://127.0.0.1:5000/",
+                         traditional: true,
+                         data: JSON.stringify({"trial":trial_dat}),
+                         dataType: "json"});
+                }
+            }
         }
 
         var instructions = {
@@ -45,7 +56,7 @@
                 "<div><img src='static/img/exampletrial.png' style='width:600px;border-style: double;'><p class='small'><strong>Example</strong></p></div>" +
                 "<div><img src='static/img/BallBimage.png' style='width: 350px;'><p class='small'><strong>Ball B</strong></p></div>" +
                 "</div><div><br><br><p style='font-size: x-large;'>Press any key to begin.</p></div>" +'',
-            post_trial_gap: 1000
+            post_trial_gap: 1000,
         };
 
         var test_trial  = {
@@ -63,6 +74,20 @@
             width: 780,
             response_ends_trial: true,
             controls: true,
+            on_finish: function () {
+                trial_dat = jsPsych.data.getLastTrialData().json()
+                console.log(trial_dat)
+                //if (JSON.parse(trial_dat)['trial_type'] === 'video_slider_response'){
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    url: "http://127.0.0.1:5000/experiment",
+                    traditional: true,
+                    data: trial_dat,
+                    dataType: "json"
+                });
+                //};
+            }
         }
 
         var test_stimuli = Stim_order
@@ -74,20 +99,34 @@
             trial_duration: function(){return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 1000, 1250,
                 1500, 1750, 2000], 1)[0]},
             data:{task:'fixation'}
-        }
+            }
+
 
         var test_procedure = {
-            timeline: [fixation, test_trial],
+            timeline: [test_trial, fixation],
             timeline_variables: test_stimuli,
             randomize_order: true
         }
 
         jsPsych.data.addProperties({
-          subject: jsPsych.randomization.randomID(15)
+          subjectID: jsPsych.randomization.randomID(15)
         });
 
-        timeline.push(preload, welcome, instructions, test_procedure, thanks)
 
+        timeline.push(preload,  test_procedure, thanks)
+
+        function saveData(){
+            var subject_dat = jsPsych.data.get().filter({'trial_type':'video-slider-response'}).json()
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                url:"http://127.0.0.1:5000/",
+                traditional: true,
+                data: JSON.stringify(jsPsych.data.get().filter({'trial_type':'video-slider-response'}).json()),
+                dataType: "json"
+            });
+        }
 
         jsPsych.init({
             timeline:timeline,
