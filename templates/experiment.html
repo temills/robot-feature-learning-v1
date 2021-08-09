@@ -76,8 +76,6 @@
             controls: true,
             on_finish: function () {
                 trial_dat = jsPsych.data.getLastTrialData().json()
-                console.log(trial_dat)
-                //if (JSON.parse(trial_dat)['trial_type'] === 'video_slider_response'){
                 $.ajax({
                     type: "POST",
                     contentType: "application/json;charset=utf-8",
@@ -86,7 +84,7 @@
                     data: trial_dat,
                     dataType: "json"
                 });
-                //};
+
             }
         }
 
@@ -109,11 +107,10 @@
         }
 
         jsPsych.data.addProperties({
-          subjectID: jsPsych.randomization.randomID(15)
+          subjectID: JSON.parse(localStorage['sub_dat'])[0]['subjectID']
         });
 
-
-        timeline.push(preload,  test_procedure, thanks)
+        timeline.push(preload, test_procedure, thanks)
 
         function saveData(){
             var subject_dat = jsPsych.data.get().filter({'trial_type':'video-slider-response'}).json()

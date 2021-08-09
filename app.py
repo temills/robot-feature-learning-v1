@@ -52,9 +52,7 @@ def intro():
         return render_template('intro.html')
     if request.method == 'POST':
         d = request.get_json()[1]
-        sid = d['subjectID']
-        subj = Subject(jspsychID=sid, date=datetime.datetime.now())
-        session['sid'] = sid
+        subj = Subject(jspsychID=d['subjectID'], date=datetime.datetime.now())
         db.session.add(subj)
         db.session.commit()
         return make_response("", 200)
@@ -77,10 +75,10 @@ def experiment():
         if vid.split('_')[2] == 'in':
             cf = True
 
-        subj = Subject.query.filter_by(jspsychID=session.get('sid')).first()
+        subj = Subject.query.filter_by(jspsychID=d['subjectID']).first()
 
         trial_dat = Trial(trial_num=d['trial_index'],
-                          jsPsychID=d['subjectID'],
+                          jspsychID=d['subjectID'],
                           stimulus=d['stimulus'][0],
                           agent=agent,
                           time_elapse=d['time_elapsed'],
