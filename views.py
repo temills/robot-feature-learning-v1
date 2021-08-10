@@ -1,48 +1,8 @@
-from flask import Flask, render_template, request, make_response, session
-import os
-from flask_sqlalchemy import SQLAlchemy
+from flask import render_template, request, make_response
+from . import app, db
+from .models import Subject, Trial
 import datetime
-import json
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-# Models
-
-
-class Subject(db.Model):
-    __tablename__ = 'subjects'
-    id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime)
-    jspsychID = db.Column(db.String, unique=True)
-    trials = db.relationship('Trial', backref='subject', lazy='dynamic', cascade="all, delete-orphan")
-
-    def __repr__(self):
-        return '<Subject %r>' % self.id
-
-
-class Trial(db.Model):
-    __tablename__ = 'trials'
-    id = db.Column(db.Integer, primary_key=True)
-    trial_num = db.Column(db.Integer)
-    jspsychID = db.Column(db.String)
-    stimulus = db.Column(db.String)
-    agent = db.Column(db.Boolean)
-    time_elapse = db.Column(db.Float)
-    stim_outcome = db.Column(db.Boolean)
-    stim_cf = db.Column(db.Boolean)
-    cause_resp = db.Column(db.Integer)
-    cf_resp = db.Column(db.Integer)
-    rt_1 = db.Column(db.Float)
-    rt_2 = db.Column(db.Float)
-    trial_rt = db.Column(db.Float)
-    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
-
-    def __repr__(self):
-        return '<Subject %r>' % self.id
 
 
 # Views
@@ -96,5 +56,5 @@ def experiment():
 
 
 
-if __name__ == '__main__':
-    app.run()
+#if __name__ == '__main__':
+#    app.run()
