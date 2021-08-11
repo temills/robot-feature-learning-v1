@@ -24,8 +24,10 @@ class Trial(db.Model):
     stim_cf = db.Column(db.Boolean)
     cause_resp = db.Column(db.Integer)
     cf_resp = db.Column(db.Integer)
+    agent_resp = db.Column(db.Integer)
     rt_1 = db.Column(db.Float)
     rt_2 = db.Column(db.Float)
+    rt_3 = db.Column(db.Float)
     trial_rt = db.Column(db.Float)
     subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id'))
 

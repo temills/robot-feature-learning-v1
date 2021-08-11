@@ -5,7 +5,7 @@
  * plugin for playing a video file and getting a slider response
  *
  * documentation: docs.jspsych.org
- *
+ * Edits by Bryan Gonzalez for experiment
  **/
 
 jsPsych.plugins["video-slider-response"] = (function() {
@@ -169,6 +169,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
       // via the play() method, rather than the autoplay attribute, to prevent showing the first frame
       video_html += ' autoplay ';
       video_html += ' loop ';
+      video_html += ' muted ';
 
     }
     if(trial.controls){
@@ -200,27 +201,29 @@ jsPsych.plugins["video-slider-response"] = (function() {
 
 
 
-    var html = '<div id="jspsych-video-slider-response-wrapper" style="margin: 100px 0px;">';
+    var html = '<div id="jspsych-video-slider-response-wrapper" style="margin: 40px 0px;">';
 
     html += '<div id="jspsych-video-slider-response-stimulus" >' + video_html + '</div>';
-    // add prompt if there is one
-    if (trial.prompt !== null) {
-      html += '<div>'+trial.prompt[0]+'</div>';
-    }
-    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
 
+    // The first slider
+    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
     if (trial.slider_width !== null) {
       html += trial.slider_width+'px;'
     } else {
       html += 'auto;'
     }
     html += '">';
-    // The first slider
+    // add prompt if there is one
+    if (trial.prompt !== null) {
+      html += '<div>'+trial.prompt[0]+'</div>';
+    }
     html += '<input type="range" class="jspsych-slider" value="'+trial.slider_start+'" min="'+trial.min+'" max="'+trial.max+'" step="'+trial.step+'" id="jspsych-video-slider-response-response_01"';
+
     if (!trial.response_allowed_while_playing) {
       html += ' disabled';
     }
     html += '></input><div>'
+
     for(var j=0; j < trial.labels.length; j++){
       var label_width_perc = 100/(trial.labels.length-1);
       var percent_of_range = j * (100/(trial.labels.length - 1));
@@ -232,19 +235,21 @@ jsPsych.plugins["video-slider-response"] = (function() {
       html += '</div>'
     }
     html += '</div>';
-    html += '</div><br>';
-    if (trial.prompt !== null) {
-      html += '<div>'+trial.prompt[1]+'</div>';
-    }
-    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
+    html += '</div>';
 
+    // The second slider
+
+    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
     if (trial.slider_width !== null) {
       html += trial.slider_width+'px;'
     } else {
       html += 'auto;'
     }
     html += '">';
-    // The second slider
+    // add prompt f there is one
+    if (trial.prompt !== null) {
+      html += '<div>'+trial.prompt[1]+'</div>';
+    }
     html += '<input type="range" class="jspsych-slider" value="'+trial.slider_start+'" min="'+trial.min+'" max="'+trial.max+'" step="'+trial.step+'" id="jspsych-video-slider-response-response_02"';
     if (!trial.response_allowed_while_playing) {
       html += ' disabled';
@@ -261,6 +266,39 @@ jsPsych.plugins["video-slider-response"] = (function() {
       html += '</div>'
     }
     html += '</div>';
+
+    // The third slider
+
+    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
+    if (trial.slider_width !== null) {
+      html += trial.slider_width+'px;'
+    } else {
+      html += 'auto;'
+    }
+    html += '">';
+    // add prompt if there is one
+    if (trial.prompt !== null) {
+      html += '<div>'+trial.prompt[2]+'</div>';
+    }
+    html += '<input type="range" class="jspsych-slider" value="'+trial.slider_start+'" min="'+trial.min+'" max="'+trial.max+'" step="'+trial.step+'" id="jspsych-video-slider-response-response_03"';
+    if (!trial.response_allowed_while_playing) {
+      html += ' disabled';
+    }
+    html += '></input><div>'
+    var anim_labels = ['Inanimate', 'Animate']
+    for(var j=0; j < 2; j++){
+      var label_width_perc = 100/(trial.labels.length-1);
+      var percent_of_range = j * (100/(trial.labels.length - 1));
+      var percent_dist_from_center = ((percent_of_range-50)/50)*100;
+      var offset = (percent_dist_from_center * half_thumb_width)/100;
+      html += '<div style="border: 1px solid transparent; display: inline-block; position: absolute; '+
+        'left:calc('+percent_of_range+'% - ('+label_width_perc+'% / 2) - '+offset+'px); text-align: center; width: '+label_width_perc+'%;">';
+      html += '<span style="text-align: center; font-size: 90%;">'+anim_labels[j]+'</span>';
+      html += '</div>'
+    }
+    html += '</div>';
+
+
     html += '</div>';
 
     html += '</div>';
@@ -317,21 +355,30 @@ jsPsych.plugins["video-slider-response"] = (function() {
 
     var first_slide = false;
     var second_slide = false;
+    var third_slide = false;
     if(trial.require_movement){
       display_element.querySelector('#jspsych-video-slider-response-response_01').addEventListener('click', function(){
         first_slide = true;
         var endTime = performance.now();
         response.rt_1 = endTime - startTime;
-        if(first_slide === true  && second_slide === true){
+        if(first_slide === true  && second_slide === true && third_slide === true){
         display_element.querySelector('#jspsych-video-slider-response-next').disabled = false;}
       });
       display_element.querySelector('#jspsych-video-slider-response-response_02').addEventListener('click', function(){
         second_slide = true;
         var endTime = performance.now();
         response.rt_2 = endTime - startTime;
-        if(first_slide === true  && second_slide === true){
+        if(first_slide === true  && second_slide === true && third_slide === true){
         display_element.querySelector('#jspsych-video-slider-response-next').disabled = false;}
       });
+      display_element.querySelector('#jspsych-video-slider-response-response_03').addEventListener('click', function(){
+        third_slide = true;
+        var endTime = performance.now();
+        response.rt_3 = endTime - startTime;
+        if(first_slide === true  && second_slide === true && third_slide === true){
+        display_element.querySelector('#jspsych-video-slider-response-next').disabled = false;}
+      });
+
     }
 
 
@@ -343,8 +390,10 @@ jsPsych.plugins["video-slider-response"] = (function() {
       rt: null,
       rt_1: null,
       rt_2: null,
+      rt_3: null,
       response_1: null,
-      response_2: null
+      response_2: null,
+      response_3: null
     };
 
     display_element.querySelector('#jspsych-video-slider-response-next').addEventListener('click', function() {
@@ -353,6 +402,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
       response.rt = endTime - startTime;
       response.response_1 = display_element.querySelector('#jspsych-video-slider-response-response_01').valueAsNumber;
       response.response_2 = display_element.querySelector('#jspsych-video-slider-response-response_02').valueAsNumber;
+      response.response_3 = display_element.querySelector('#jspsych-video-slider-response-response_03').valueAsNumber;
 
       if(trial.response_ends_trial){
         end_trial();
@@ -382,7 +432,9 @@ jsPsych.plugins["video-slider-response"] = (function() {
         response_1: response.response_1,
         rt_1: response.rt_1,
         response_2: response.response_2,
-        rt_2: response.rt_2
+        rt_2: response.rt_2,
+        response_3: response.response_3,
+        rt_3: response.rt_3
       };
 
 

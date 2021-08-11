@@ -1,7 +1,8 @@
 <!DOCTYPE html>
     <head>
         <title>Pool Shark</title>
-        <link rel="Favicon" href="/static/favicon.ico" />
+        <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
         <script src="/static/jspsych-6.3.1/jspsych.js"></script>
         <script src="/static/jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
@@ -9,7 +10,6 @@
         <script src="/static/jspsych-6.3.1/plugins/jspsych-video-slider-response.js"></script>
         <script src="/static/jspsych-6.3.1/plugins/jspsych-preload.js"></script>
         <script src="/static/stimuli_order.js" id="stim_order" type="text/javascript"></script>
-        <script src="/static/jspsych-6.3.1/jquery-min.js"></script>
         <link href="/static/jspsych-6.3.1/fonts/">
         <link href="/static/jspsych-6.3.1/css/jspsych.css" rel="stylesheet" type="text/css">
     </head>
@@ -38,7 +38,7 @@
                      $.ajax({
                          type: "POST",
                          contentType: "application/json;charset=utf-8",
-                         url:"http://127.0.0.1:5000/",
+                         url:"/",
                          traditional: true,
                          data: JSON.stringify({"trial":trial_dat}),
                          dataType: "json"});
@@ -53,15 +53,15 @@
                 "alternative events.</p><p> Make your judgement based on the videos displayed by using a slider bar to " +
                 "indicate your agreement with the statements on the screen.</p></span>" +
                 "<div class='row' style='display: inline-flex;'>" +
-                "<div><img src='static/img/ballAimage.png' style='width:350px;'><p class='small'><strong>Ball A</strong></p></div>" +
-                "<div><img src='static/img/exampletrial.png' style='width:600px;border-style: double;'><p class='small'><strong>Example</strong></p></div>" +
-                "<div><img src='static/img/BallBimage.png' style='width: 350px;'><p class='small'><strong>Ball B</strong></p></div>" +
+                "<div><img src='static/img/ballAimage.png' style='width:50%;'><p class='small'><strong>Ball A</strong></p></div>" +
+                "<div><img src='static/img/exampletrial.png' style='width:-webkit-fill-available;border-style: double;'><p class='small'><strong>Example</strong></p></div>" +
+                "<div><img src='static/img/ballBimage.png' style='width:50%;'><p class='small'><strong>Ball B</strong></p></div>" +
                 "</div><div><br><br><p style='font-size: x-large;'>Press any key to begin.</p></div>" +'',
             post_trial_gap: 1000,
             on_finish: function(){$.ajax({
                          type: "POST",
                          contentType: "application/json;charset=utf-8",
-                         url:"http://127.0.0.1:5000/",
+                         url:"/",
                          traditional: true,
                          data: jsPsych.data.getLastTrialData().json(),
                          dataType: "json"});
@@ -91,7 +91,7 @@
                 $.ajax({
                     type: "POST",
                     contentType: "application/json;charset=utf-8",
-                    url: "http://127.0.0.1:5000/experiment",
+                    url: "/",
                     traditional: true,
                     data: trial_dat,
                     dataType: "json"
