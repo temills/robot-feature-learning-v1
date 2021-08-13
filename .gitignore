@@ -1,3 +1,5 @@
+billiards_app/__init__.py
+billiards_app/localData.db
 *.sqlite
 *.db
 venv
