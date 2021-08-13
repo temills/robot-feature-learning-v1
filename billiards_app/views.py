@@ -1,4 +1,4 @@
-from flask import render_template, request, make_response
+from flask import render_template, request, make_response, session
 from . import app, db
 from .models import Subject, Trial
 import datetime
@@ -12,13 +12,14 @@ def experiment():
         return render_template('experiment.html')
     if request.method == 'POST':
         d = request.get_json(force=True)[0]
-        if 'In this experiment' in d['stimulus']:  #(d['trial_type'] == 'html-keyboard-response') & (d['trial_index'] == 2):
-            print('found a new subject:'+ d['subjectID'])
-            subj = Subject(jspsychID=d['subjectID'], date=datetime.datetime.now())
+        if d['trial_type'] == 'survey-text':
+            session['prolificID'] = d['response']['prolificID']
+        elif 'In this experiment' in d['stimulus']:  #(d['trial_type'] == 'html-keyboard-response') & (d['trial_index'] == 2):
+            print('found a new subject:' + d['subjectID'])
+            subj = Subject(jspsychID=d['subjectID'], prolificID=session.get('prolificID'), date=datetime.datetime.now())
             db.session.add(subj)
             db.session.commit()
-        else:
-        # if d['trial_type'] == 'video-slider-response':
+        else: #d['trial_type'] == 'video-slider-response':
             print('new trial data received')
             vid = d['stimulus'][0].split('/')[2]
             agent = False

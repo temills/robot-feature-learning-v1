@@ -6,6 +6,7 @@ class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
     jspsychID = db.Column(db.String, unique=True)
+    prolificID = db.Column(db.String)
     trials = db.relationship('Trial', backref='subject', lazy='dynamic', cascade="all, delete-orphan")
 
     def __repr__(self):
