@@ -20,12 +20,13 @@ def experiment():
             db.session.add(subj)
             db.session.commit()
         else: #d['trial_type'] == 'video-slider-response':
-            print('new trial data received')
+            #print('new trial data received')
+            print(d['stimulus'])
             vid = d['stimulus'][0].split('/')[2]
             agent = False
             outcome = False
             cf = False
-            if 'a' in vid:
+            if 'a_' in vid:
                 agent = True
             if vid.split('_')[1] == 'in':
                 outcome = True
@@ -36,7 +37,7 @@ def experiment():
 
             trial_dat = Trial(trial_num=d['trial_index'],
                               jspsychID=d['subjectID'],
-                              stimulus=d['stimulus'][0],
+                              stimulus=vid,
                               agent=agent,
                               time_elapse=d['time_elapsed'],
                               stim_outcome=outcome,
