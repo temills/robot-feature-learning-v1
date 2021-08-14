@@ -24,6 +24,7 @@
         var preload = {
             type: 'preload',
             auto_preload: true,
+            message: "<p style='font-size: 3em;'>Loading experiment stimuli, this may take a few moments....</p><p style='font-size: 2em;'>Thank you for your patience.</p>",
             video: ['./static/videos/15p_out_out_med.mp4', './static/videos/4p_in_out_med.mp4', './static/videos/21p_out_in_med.mp4', './static/videos/17a_out_out_far.mp4', './static/videos/7p_in_in.mp4', './static/videos/1a_in_out_close.mp4', './static/videos/20p_out_in_close.mp4', './static/videos/11p_in_in.mp4', './static/videos/14a_out_out_close.mp4', './static/videos/22a_out_in_med.mp4', './static/videos/2p_in_out_close.mp4', './static/videos/3p_in_out_med.mp4', './static/videos/18a_out_out_far.mp4', './static/videos/2a_in_out_close.mp4', './static/videos/8p_in_in.mp4', './static/videos/16a_out_out_med.mp4', './static/videos/9a_in_in.mp4', './static/videos/6a_in_out_far.mp4', './static/videos/1p_in_out_close.mp4', './static/videos/20a_out_in_close.mp4', './static/videos/23a_out_in_far.mp4', './static/videos/13p_out_out_close_.mp4', './static/videos/12a_in_in.mp4', './static/videos/24a_out_in_far.mp4', './static/videos/14p_out_out_close_.mp4', './static/videos/5p_in_out_far.mp4', './static/videos/21a_out_in_med.mp4', './static/videos/10p_in_in.mp4', './static/videos/17p_out_out_far.mp4', './static/videos/11a_in_in.mp4', './static/videos/4a_in_out_med.mp4', './static/videos/19a_out_in_close.mp4', './static/videos/3a_in_out_med.mp4', './static/videos/18p_out_out_far.mp4', './static/videos/7a_in_in.mp4', './static/videos/13a_out_out_close.mp4', './static/videos/22p_out_in_med.mp4', './static/videos/23p_out_in_far.mp4', './static/videos/15a_out_out_close.mp4', './static/videos/12p_in_in.mp4', './static/videos/16p_out_out_med.mp4', './static/videos/6p_in_out_far.mp4', './static/videos/10 a_in_in.mp4', './static/videos/5a_in_out_far.mp4', './static/videos/9p_in_in.mp4', './static/videos/8a_in_in.mp4', './static/videos/19p_out_in_close.mp4', './static/videos/24p_out_in_far.mp4']
         }
 
@@ -122,7 +123,7 @@
         var test_trial  = {
             type: 'video-slider-response',
             stimulus: jsPsych.timelineVariable('stimulus'),
-            labels: ['Totally Disagree', 'Totally Agree'],
+            labels: ['Disagree', 'Agree'],
             min: 1,
             max: 100,
             step: 1,
@@ -133,7 +134,7 @@
             rate: 1.5,
             width: 780,
             response_ends_trial: true,
-            controls: true,
+            controls: false,
             on_finish: function () {
                 trial_dat = jsPsych.data.getLastTrialData().json()
                 $.ajax({
