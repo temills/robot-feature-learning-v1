@@ -5,4 +5,5 @@ billiards_app/localData.db
 venv
 *.pyc
 *.png
-Pilot/Data/*
+*db
+*.csv
