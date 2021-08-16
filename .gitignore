@@ -5,4 +5,4 @@ billiards_app/localData.db
 venv
 *.pyc
 *.png
-pilot_data_analysis.ipynb
+Pilot/Data/*

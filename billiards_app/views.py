@@ -21,13 +21,10 @@ def experiment():
             db.session.commit()
         else: #d['trial_type'] == 'video-slider-response':
             print('new trial data received')
-            vid = d['stimulus'][0].split('/')[2]
-
             subj = Subject.query.filter_by(jspsychID=d['subjectID']).first()
-
             trial_dat = Trial(trial_num=d['trial_index'],
                               jspsychID=d['subjectID'],
-                              stimulus=vid,
+                              stimulus=d['stimulus'][0].split('/')[2],
                               time_elapse=d['time_elapsed'],
                               cause_resp=d['response_1'],
                               cf_resp=d['response_2'],
@@ -37,6 +34,7 @@ def experiment():
                               rt_3=d['rt_3'],
                               trial_rt=d['rt'],
                               subject_id=subj.id)
+
             db.session.add(trial_dat)
             db.session.commit()
 
