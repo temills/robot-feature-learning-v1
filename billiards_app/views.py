@@ -4,11 +4,12 @@ from .models import Subject, Trial
 import datetime
 
 
-
 # Views
+
+
 @app.route('/', methods=['GET', 'POST'])
 def experiment():
-    n_trls = 48
+    n_trls = 4
     if request.method == 'GET':
         return render_template('experiment.html')
     if request.method == 'POST':
@@ -16,7 +17,7 @@ def experiment():
         if d['trial_type'] == 'survey-text':
             session['prolificID'] = d['response']['prolificID']
             session['exp_trial'] = 0
-        elif 'In this experiment' in d['stimulus']:  #(d['trial_type'] == 'html-keyboard-response') & (d['trial_index'] == 2):
+        elif 'In this experiment' in d['stimulus']:
             print('found a new subject:' + d['subjectID'])
             subj = Subject(jspsychID=d['subjectID'], prolificID=session.get('prolificID'), date=datetime.datetime.now())
             db.session.add(subj)
