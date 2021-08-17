@@ -8,12 +8,14 @@ import datetime
 # Views
 @app.route('/', methods=['GET', 'POST'])
 def experiment():
+    n_trls = 48
     if request.method == 'GET':
         return render_template('experiment.html')
     if request.method == 'POST':
         d = request.get_json(force=True)[0]
         if d['trial_type'] == 'survey-text':
             session['prolificID'] = d['response']['prolificID']
+            session['exp_trial'] = 0
         elif 'In this experiment' in d['stimulus']:  #(d['trial_type'] == 'html-keyboard-response') & (d['trial_index'] == 2):
             print('found a new subject:' + d['subjectID'])
             subj = Subject(jspsychID=d['subjectID'], prolificID=session.get('prolificID'), date=datetime.datetime.now())
@@ -21,8 +23,10 @@ def experiment():
             db.session.commit()
         else: #d['trial_type'] == 'video-slider-response':
             print('new trial data received')
+            t = session.get('exp_trial')+1
+            session['exp_trial'] = t
             subj = Subject.query.filter_by(jspsychID=d['subjectID']).first()
-            trial_dat = Trial(trial_num=d['trial_index'],
+            trial_dat = Trial(trial_num=t,
                               jspsychID=d['subjectID'],
                               stimulus=d['stimulus'][0].split('/')[2],
                               time_elapse=d['time_elapsed'],
@@ -34,7 +38,9 @@ def experiment():
                               rt_3=d['rt_3'],
                               trial_rt=d['rt'],
                               subject_id=subj.id)
-
+            if t == n_trls:
+                subj.completion = True
+                db.session.add(subj)
             db.session.add(trial_dat)
             db.session.commit()
 
