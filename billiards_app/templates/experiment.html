@@ -169,7 +169,7 @@
 
         jsPsych.data.addProperties({
             subjectID: jsPsych.randomization.randomID(15),
-            prolificID: 'xxx'
+            prolificID: jsPsych.data.getURLVariable('PROLIFIC_PID')
         });
         timeline.push(browser_check, consent, prolificID, preload, welcome,instructions,  test_procedure, thanks, debrief)
 
