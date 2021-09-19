@@ -1,3 +1,4 @@
+.idea
 billiards_app/__init__.py
 billiards_app/localData.db
 billiards_app/static/stimuli_order.js
