@@ -8,3 +8,5 @@ pilot/Plots/*
 *.venv
 *.pyc
 *db
+.Rhistory
+
