@@ -212,7 +212,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
     } else {
       html += 'auto;'
     }
-    html += '">';
+    html += '"id="prompt_01">';
     // add prompt if there is one
     if (trial.prompt !== null) {
       html += '<div>'+trial.prompt[0]+'</div>';
@@ -239,7 +239,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
 
     // The second slider
 
-    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
+    html += '<div class="jspsych-video-slider-response-container" id="prompt_02" style="display:none; position:relative; margin: 0 auto 3em auto; width:';
     if (trial.slider_width !== null) {
       html += trial.slider_width+'px;'
     } else {
@@ -270,7 +270,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
 
     // The third slider
 
-    html += '<div class="jspsych-video-slider-response-container" style=" position:relative; margin: 0 auto 3em auto; width:';
+    html += '<div class="jspsych-video-slider-response-container" id="prompt_03" style="display: none; position:relative; margin: 0 auto 3em auto; width:';
     if (trial.slider_width !== null) {
       html += trial.slider_width+'px;'
     } else {
@@ -362,6 +362,8 @@ jsPsych.plugins["video-slider-response"] = (function() {
         first_slide = true;
         var endTime = performance.now();
         response.rt_1 = endTime - startTime;
+        display_element.querySelector('#prompt_01').style.display = 'none';
+        display_element.querySelector('#prompt_02').style.display = 'inherit';
         if(first_slide === true  && second_slide === true && third_slide === true){
         display_element.querySelector('#jspsych-video-slider-response-next').disabled = false;}
       });
@@ -369,6 +371,8 @@ jsPsych.plugins["video-slider-response"] = (function() {
         second_slide = true;
         var endTime = performance.now();
         response.rt_2 = endTime - startTime;
+        display_element.querySelector('#prompt_02').style.display ='none';
+        display_element.querySelector('#prompt_03').style.display = 'inherit';
         if(first_slide === true  && second_slide === true && third_slide === true){
         display_element.querySelector('#jspsych-video-slider-response-next').disabled = false;}
       });
