@@ -266,10 +266,11 @@ jsPsych.plugins["video-slider-response"] = (function() {
       html += '</div>'
     }
     html += '</div>';
+    html += '</div>';
 
     // The third slider
 
-    html += '<div class="jspsych-video-slider-response-container" style="position:relative; margin: 0 auto 3em auto; width:';
+    html += '<div class="jspsych-video-slider-response-container" style=" position:relative; margin: 0 auto 3em auto; width:';
     if (trial.slider_width !== null) {
       html += trial.slider_width+'px;'
     } else {
@@ -381,7 +382,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
 
     }
 
-
+    // highlight on hover
 
     var startTime = performance.now();
 
