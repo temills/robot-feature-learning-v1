@@ -213,7 +213,7 @@
         });
 
         var both_blocks = jsPsych.randomization.shuffle([cause_block, cf_block])
-        timeline.push(browser_check, consent, prolificID, preload, welcome, both_blocks[0], both_blocks[1], thanks, debrief)
+        timeline.push(browser_check, consent, prolificID, preload, welcome, cause_block, thanks, debrief)
 
         function saveData(){
             //var subject_dat = jsPsych.data.get().filter({'trial_type':'video-slider-response'}).json()

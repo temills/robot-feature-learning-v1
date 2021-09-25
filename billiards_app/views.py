@@ -43,7 +43,7 @@ def experiment():
                 db.session.add(subj)
             db.session.add(trial_dat)
             db.session.commit()
-
+        '''
         elif d['trial_type'] == 'video-slider-response_CF':
             print('new trial data received')
             t = session.get('exp_trial')+1
@@ -69,6 +69,6 @@ def experiment():
                 db.session.add(subj)
             db.session.add(trial_dat)
             db.session.commit()
-
+            '''
         return make_response("", 200)
 
