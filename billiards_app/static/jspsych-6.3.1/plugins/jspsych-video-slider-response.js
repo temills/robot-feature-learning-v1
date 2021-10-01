@@ -240,7 +240,7 @@ jsPsych.plugins["video-slider-response"] = (function() {
 
     // The second slider
 
-    html += '<div class="jspsych-video-slider-response-container" id="prompt_02" style="display: none; position:relative; margin: 0 auto 3em auto; width:';
+    html += '<div class="jspsych-video-slider-response-container" id="prompt_02" style="opacity: .2; position:relative; margin: 0 auto 3em auto; width:';
     if (trial.slider_width !== null) {
       html += trial.slider_width+'px;'
     } else {
@@ -328,8 +328,8 @@ jsPsych.plugins["video-slider-response"] = (function() {
         first_slide = true;
         var endTime = performance.now();
         response.rt_1 = endTime - startTime;
-        display_element.querySelector('#prompt_01').style.display = 'none';
-        display_element.querySelector('#prompt_02').style.display = 'inherit';
+        //display_element.querySelector('#prompt_01').style.display = 'none';
+        display_element.querySelector('#prompt_02').style.opacity = 1;
         if(first_slide === true  && second_slide === true){
         display_element.querySelector('#jspsych-video-slider-response-next').disabled = false;}
       });
