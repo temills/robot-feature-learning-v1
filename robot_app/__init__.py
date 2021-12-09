@@ -1,0 +1,43 @@
+from flask import Flask
+import os
+print("ok")
+from flask_sqlalchemy import SQLAlchemy
+print("ok2")
+import json
+from flask_cors import CORS
+print("ok3")
+
+app = Flask(__name__)
+#with open('/etc/config.json') as config_file:
+#    config = json.load(config_file)
+app.config['SECRET_KEY'] = 'xx'#config.get('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///local_test.db"  #config.get('SQLALCHEMY_DATABASE_URI') #make local db for testing
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+CORS(app)
+from . import views
+if __name__ == '__main__':
+    app.run()
+#make sure actually writing to database
+#increase num trials
+
+
+#export FLASK_APP=__init__.py
+#flask shell
+#from robot_app import db
+#db.create_all()
+
+#flask run 
+
+#sqlite3
+#.open local3.db
+#select * from trials;
+#https://inloop.github.io/sqlite-viewer/
+
+#ssh tracey@69.164.210.172
+#screen -ls
+#screen -d to detach
+#screen -r to reattach
+
+#to run locally, url in views and experiment should be "/"
+#to run on server, url = '/botstudy' and 'botstudy'
