@@ -1,0 +1,107 @@
+Subject: 6147724c13bb365774e24af1
+Correct: 60(all pairs), 19(round 1 pairs), 18(round 2 pairs), 23(round 3 pairs),  2(memory test 1),  3(memory test 2), 19(memory test 3)
+Generations: ['Rose', 'Doris', 'Jean', 'Vincent', 'Doris', 'Jean', 'Ray']
+Task favored bots with 1 for feature 2, 0 for feature 3
+Features of bots generated:
+[1, 0, 1, 1]
+[0, 0, 0, 0]
+[0, 1, 0, 0]
+[1, 0, 0, 1]
+[0, 0, 0, 0]
+[0, 1, 0, 0]
+[0, 1, 1, 0]
+ 
+Subject: 6111c4d73770d7b1755a75e0
+Correct: 65(all pairs), 18(round 1 pairs), 23(round 2 pairs), 24(round 3 pairs),  3(memory test 1),  2(memory test 2), 18(memory test 3)
+Generations: ['Wayne', 'Theresa', 'Juan', 'Rose', 'Beverly', 'Kayla', 'Russell', 'Rose', 'Wayne', 'Danielle']
+Task favored bots with 1 for feature 2, 1 for feature 4
+Features of bots generated:
+[0, 0, 0, 1]
+[0, 1, 0, 1]
+[1, 1, 1, 1]
+[1, 0, 1, 1]
+[0, 1, 0, 0]
+[1, 0, 1, 0]
+[1, 1, 1, 0]
+[1, 0, 1, 1]
+[0, 0, 0, 1]
+[0, 0, 0, 0]
+ 
+Subject: 61101aab37d8acfaf161bd22
+Correct: 87(all pairs), 24(round 1 pairs), 32(round 2 pairs), 31(round 3 pairs),  8(memory test 1),  8(memory test 2), 24(memory test 3)
+Generations: ['Kayla', 'Kayla', 'Rose', 'Jean', 'Juan', 'Lawrence', 'Kayla', 'Jean', 'Ray']
+Task favored bots with 1 for feature 4, 0 for feature 1
+Features of bots generated:
+[1, 1, 0, 0]
+[1, 1, 0, 0]
+[1, 0, 1, 0]
+[0, 0, 1, 0]
+[0, 1, 0, 1]
+[1, 0, 1, 1]
+[1, 1, 0, 0]
+[0, 0, 1, 0]
+[0, 1, 0, 0]
+ 
+Subject: 6111222e32af8e3a691de05a
+Correct: 46(all pairs), 13(round 1 pairs), 17(round 2 pairs), 16(round 3 pairs),  2(memory test 1),  3(memory test 2), 13(memory test 3)
+Generations: ['Jean', 'Ray', 'Vincent', 'Rose', 'Marilyn', 'Doris', 'Elijah']
+Task favored bots with 1 for feature 4, 0 for feature 2
+Features of bots generated:
+[1, 1, 0, 0]
+[1, 0, 0, 1]
+[0, 0, 1, 1]
+[0, 1, 1, 0]
+[0, 1, 1, 1]
+[0, 0, 1, 0]
+[1, 1, 0, 1]
+ 
+Subject: 5edc203396a7278dd3c731ed
+Correct: 63(all pairs), 17(round 1 pairs), 22(round 2 pairs), 24(round 3 pairs),  0(memory test 1),  3(memory test 2), 17(memory test 3)
+Generations: ['doris', 'marilyn', 'elijah']
+Task favored bots with 1 for feature 3, 1 for feature 4
+Features of bots generated:
+[0, 0, 0, 1]
+[1, 1, 1, 1]
+[1, 1, 0, 0]
+ 
+Subject: Jane
+Correct: 60(all pairs), 17(round 1 pairs), 19(round 2 pairs), 24(round 3 pairs),  3(memory test 1),  2(memory test 2), 17(memory test 3)
+Generations: ['Beverly', 'Jean', 'Russell', 'Lawrence', 'Danielle', 'Vincent', 'Juan']
+Task favored bots with 0 for feature 1, 0 for feature 3
+Features of bots generated:
+[1, 1, 1, 0]
+[1, 1, 0, 0]
+[1, 0, 0, 1]
+[1, 0, 1, 1]
+[0, 1, 0, 0]
+[0, 1, 1, 0]
+[0, 0, 1, 1]
+ 
+Subject: eli
+Correct: 88(all pairs), 26(round 1 pairs), 30(round 2 pairs), 32(round 3 pairs),  7(memory test 1),  7(memory test 2), 26(memory test 3)
+Generations: ['beverly', 'juan', 'kayla', 'theresa', 'eugene', 'lawrence', 'ray', 'marilyn', 'beverly']
+Task favored bots with 1 for feature 4, 1 for feature 1
+Features of bots generated:
+[0, 0, 0, 0]
+[1, 0, 0, 1]
+[0, 1, 1, 1]
+[1, 0, 0, 0]
+[1, 1, 1, 0]
+[0, 1, 1, 0]
+[1, 1, 1, 1]
+[0, 0, 0, 1]
+[0, 0, 0, 0]
+ 
+Subject: yuri
+Correct: 85(all pairs), 26(round 1 pairs), 27(round 2 pairs), 32(round 3 pairs),  5(memory test 1),  3(memory test 2), 26(memory test 3)
+Generations: ['wayne', 'rose', 'lawrence', 'eugene', 'kayla', 'jean', 'juan']
+Task favored bots with 1 for feature 4, 0 for feature 1
+Features of bots generated:
+[1, 1, 1, 1]
+[0, 0, 0, 0]
+[1, 0, 0, 0]
+[1, 0, 0, 1]
+[0, 1, 1, 0]
+[1, 1, 1, 0]
+[0, 0, 0, 1]
+ 

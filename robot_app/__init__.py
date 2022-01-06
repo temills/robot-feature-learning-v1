@@ -41,3 +41,13 @@ if __name__ == '__main__':
 
 #to run locally, url in views and experiment should be "/"
 #to run on server, url = '/botstudy' and 'botstudy'
+#li125-172.members.linode.com
+
+#screen, gunicorn, ctr a then d
+
+#might need to do ps-A then kill gunicorn tasks if not working
+
+
+
+
+#sqlite-utils test3.db "select * from trials" --json-cols > out.json to get data
