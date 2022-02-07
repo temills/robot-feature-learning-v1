@@ -43,7 +43,9 @@ if __name__ == '__main__':
 #to run on server, url = '/botstudy' and 'botstudy'
 #li125-172.members.linode.com
 
-#screen, gunicorn, ctr a then d
+#screen
+#gunicorn -w 9 <dir to folder containing init file>: app
+#ctr a then d
 
 #might need to do ps-A then kill gunicorn tasks if not working
 
